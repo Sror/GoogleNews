@@ -49,6 +49,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)refreshButtonDidPressed:(id)sender
+{
+    [_data parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

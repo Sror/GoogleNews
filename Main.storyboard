@@ -67,7 +67,13 @@
                             <outlet property="delegate" destination="LVG-iC-eD3" id="Oqz-oX-xTq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="byw-Hr-0us"/>
+                    <navigationItem key="navigationItem" id="byw-Hr-0us">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="SUs-eq-IBP">
+                            <connections>
+                                <action selector="refreshButtonDidPressed:" destination="LVG-iC-eD3" id="7xI-y2-0dM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="navItem" destination="byw-Hr-0us" id="UiB-ts-R6u"/>
