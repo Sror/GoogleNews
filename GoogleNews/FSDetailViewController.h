@@ -11,8 +11,8 @@
 @interface FSDetailViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
-@property (strong, nonatomic) NSMutableDictionary *item; //the item
+@property (strong, nonatomic) NSMutableDictionary *item; //the "news" item
 @property (weak, nonatomic) IBOutlet UIWebView *itemWebView;
-//give an item?
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator; //indicates that UIWebView performs request
 
 @end

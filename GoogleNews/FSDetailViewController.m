@@ -8,7 +8,9 @@
 
 #import "FSDetailViewController.h"
 
-@interface FSDetailViewController ()
+@interface FSDetailViewController () <UIWebViewDelegate, UIAlertViewDelegate> {
+    int _webViewFramesLoad; //there are many frames on page. I decided to count these frames to prevent blinking of activity indicator
+}
 
 @end
 
@@ -26,27 +28,59 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _navItem.title = @"Item";
+    _navItem.title = @"Detail";
+    NSURL *url = [NSURL URLWithString:[_item objectForKey:@"link"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [_itemWebView setDelegate:self];
+    [_itemWebView loadRequest:request];
     _itemWebView.scalesPageToFit = YES; //gesture pinch to zoom
-    [_itemWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_item objectForKey:@"link"]]]];
-    // Do any additional setup after loading the view.
+    _activityIndicator.hidesWhenStopped = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)viewDidDisappear:(BOOL)animated
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [_itemWebView loadHTMLString:@"" baseURL:nil]; //just in case
+    [super viewDidDisappear:animated];
 }
-*/
+
+#pragma mark UIWebViewDelegate methods
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    //err alert
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
+                                                    message:@"Can't open this page"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [_activityIndicator startAnimating]; //start animating indicator
+    _webViewFramesLoad++;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    _webViewFramesLoad--;
+    if (_webViewFramesLoad <= 0) {
+        [_activityIndicator stopAnimating]; //stop animation only when all frames has been loaded
+    }
+}
+
+
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES]; //go back
+}
 
 @end
