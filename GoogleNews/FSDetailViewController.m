@@ -8,7 +8,7 @@
 
 #import "FSDetailViewController.h"
 
-@interface FSDetailViewController () <UIWebViewDelegate, UIAlertViewDelegate> {
+@interface FSDetailViewController () <UIWebViewDelegate> {
     int _webViewFramesLoad; //there are many frames on page. I decided to count these frames to prevent blinking of activity indicator
 }
 
@@ -52,13 +52,10 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    //err alert
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
-                                                    message:@"Can't open this page"
-                                                   delegate:self
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles:nil];
-    [alert show];
+    //if the some frame failed to load - then something is wrong with the page
+    //now calm down and stop activity indicator
+    _webViewFramesLoad--;
+    [_activityIndicator stopAnimating];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -73,14 +70,6 @@
     if (_webViewFramesLoad <= 0) {
         [_activityIndicator stopAnimating]; //stop animation only when all frames has been loaded
     }
-}
-
-
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    [self.navigationController popViewControllerAnimated:YES]; //go back
 }
 
 @end
