@@ -10,8 +10,6 @@
 
 @interface FSData : NSObject
 
-
-@property (strong, nonatomic) NSMutableArray *news; //will contain downloaded news
 /*
 this array consists of a NSDictionary objects that contain key-object pairs. Here are these keys:
 @"title" string
@@ -20,6 +18,12 @@ this array consists of a NSDictionary objects that contain key-object pairs. Her
 @"picture" url
 */
 
+// clue for improper use (produces compile time error)
++(instancetype) alloc __attribute__((unavailable("alloc not available, call sharedInstance instead")));
+-(instancetype) init __attribute__((unavailable("init not available, call sharedInstance instead")));
++(instancetype) new __attribute__((unavailable("new not available, call sharedInstance instead")));
+
++ (instancetype)sharedData;
 - (void)parseAtUrl:(NSURL *)url;
 - (NSArray *)fetchData;
 

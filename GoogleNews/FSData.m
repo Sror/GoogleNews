@@ -10,6 +10,7 @@
 
 @interface FSData () <NSXMLParserDelegate>
 
+@property (strong, nonatomic) NSMutableArray *privateNews; //will contain downloaded news
 @property (strong, nonatomic) NSXMLParser *parser; //xml parser object
 @property (strong, nonatomic) NSString *element; //element that parsing at moment
 @property (strong, nonatomic) NSMutableDictionary *item; //contains the item title, url, picture, etc.
@@ -23,15 +24,36 @@
 
 @implementation FSData
 
-- (instancetype) init
++ (instancetype)sharedData
 {
-    self = [super init];
-    return self;
+    static FSData *shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shared = [[super alloc] initUniqueInstance];
+    });
+    return shared;
+}
+
+//do not use default init method
+- (instancetype)init
+{
+    @throw [NSException exceptionWithName:@"Singleton"
+                                   reason:@"Use +[FSData sharedData]"
+                                 userInfo:nil];
+    return nil;
+}
+
+- (instancetype)initUniqueInstance
+{
+    return [super init];
 }
 
 - (void)parseAtUrl:(NSURL *)url
 {
-    _news = [[NSMutableArray alloc] init];
+    if (_privateNews) {
+        [_privateNews removeAllObjects]; //clean after prev. use
+    }
+    _privateNews = [[NSMutableArray alloc] init];
     _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
     [_parser setDelegate:self];
     [_parser parse];
@@ -39,7 +61,7 @@
 
 - (NSArray *)fetchData
 {
-    return _news;
+    return [_privateNews copy];
 }
 
 #pragma mark -  Parser delegate methods
@@ -92,7 +114,7 @@
             _itemPictureAddres = [NSMutableString stringWithFormat:@"https://%@", link];
         }
         [_item setObject:_itemPictureAddres forKey:@"picture"];
-        [_news addObject:_item];
+        [_privateNews addObject:_item];
     }
 }
 

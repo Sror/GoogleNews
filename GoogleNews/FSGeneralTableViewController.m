@@ -11,9 +11,10 @@
 #import "FSData.h"
 #import "FSDetailViewController.h"
 
+#define newsArray [[FSData sharedData] fetchData]
+
 @interface FSGeneralTableViewController ()
 
-@property (strong, nonatomic) FSData *data;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 
 @end
@@ -32,15 +33,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    _data = [[FSData alloc] init];
     //<channel>Главные новости – Новости Google
     _navItem.title = @"General news";
-    [_data parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +46,7 @@
 
 - (IBAction)refreshButtonDidPressed:(id)sender
 {
-    [_data parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
     [self.tableView reloadData];
 }
 
@@ -66,7 +61,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [_data.news count];
+    return [[[FSData sharedData] fetchData] count];
 }
 
 
@@ -75,13 +70,13 @@
     static NSString *cellIdentifier = @"NewsHeaderCell";
     FSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     // Configure the cell...
-    cell.headerLabel.text = [_data.news[indexPath.row] objectForKey:@"title"];
-    cell.dateLabel.text = [_data.news[indexPath.row] objectForKey:@"pubDate"];
+    cell.headerLabel.text = [newsArray[indexPath.row] objectForKey:@"title"];
+    cell.dateLabel.text = [newsArray[indexPath.row] objectForKey:@"pubDate"];
     //picture
     NSString *pictureUrl = [[NSString alloc] init];
-    pictureUrl = [_data.news[indexPath.row] objectForKey:@"picture"];
+    pictureUrl = [newsArray[indexPath.row] objectForKey:@"picture"];
     if (![pictureUrl  isEqual: @"null"]) {
-        NSURL *url = [NSURL URLWithString:[_data.news[indexPath.row] objectForKey:@"picture"]];
+        NSURL *url = [NSURL URLWithString:[newsArray[indexPath.row] objectForKey:@"picture"]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *img = [[UIImage alloc] initWithData:data];
         cell.picture.image = img;
@@ -101,7 +96,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"detail"]) {
         NSIndexPath *index = [self.tableView indexPathForSelectedRow];
-        [[segue destinationViewController] setItem:_data.news[index.row]];
+        [[segue destinationViewController] setItem:newsArray[index.row]];
     }
 }
 
