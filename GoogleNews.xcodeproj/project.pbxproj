@@ -25,6 +25,7 @@
 		8434E52E1960431E0021F076 /* FSData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434E52D1960431E0021F076 /* FSData.m */; };
 		8434E530196087E80021F076 /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434E52F196087E80021F076 /* noImage.png */; };
 		8434E5771960ACE80021F076 /* FSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8434E5761960ACE80021F076 /* FSDetailViewController.m */; };
+		84C7F991196304F200A277A0 /* FSChannelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C7F990196304F200A277A0 /* FSChannelsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		8434E52F196087E80021F076 /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = "<group>"; };
 		8434E5751960ACE80021F076 /* FSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDetailViewController.h; sourceTree = "<group>"; };
 		8434E5761960ACE80021F076 /* FSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDetailViewController.m; sourceTree = "<group>"; };
+		84C7F98F196304F100A277A0 /* FSChannelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChannelsTableViewController.h; sourceTree = "<group>"; };
+		84C7F990196304F200A277A0 /* FSChannelsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChannelsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				8434E51F1960216F0021F076 /* Main.storyboard */,
 				8434E52C1960431E0021F076 /* FSData.h */,
 				8434E52D1960431E0021F076 /* FSData.m */,
+				84C7F98F196304F100A277A0 /* FSChannelsTableViewController.h */,
+				84C7F990196304F200A277A0 /* FSChannelsTableViewController.m */,
 				8434E5211960241D0021F076 /* FSGeneralTableViewController.h */,
 				8434E5221960241D0021F076 /* FSGeneralTableViewController.m */,
 				8434E5291960289B0021F076 /* FSTableViewCell.h */,
@@ -281,6 +286,7 @@
 				8434E501196021410021F076 /* FSAppDelegate.m in Sources */,
 				8434E52E1960431E0021F076 /* FSData.m in Sources */,
 				8434E5771960ACE80021F076 /* FSDetailViewController.m in Sources */,
+				84C7F991196304F200A277A0 /* FSChannelsTableViewController.m in Sources */,
 				8434E5231960241D0021F076 /* FSGeneralTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +484,7 @@
 				8434E51B196021420021F076 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8434E51C196021420021F076 /* Build configuration list for PBXNativeTarget "GoogleNewsTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +493,7 @@
 				8434E51E196021420021F076 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

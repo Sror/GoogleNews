@@ -10,4 +10,6 @@
 
 @interface FSGeneralTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic) NSDictionary *channel;
+
 @end

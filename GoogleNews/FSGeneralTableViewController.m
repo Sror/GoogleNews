@@ -18,6 +18,7 @@
 
 @end
 
+
 @implementation FSGeneralTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -38,9 +39,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     _data = [[FSData alloc] init];
-    //<channel>Главные новости – Новости Google
-    _navItem.title = @"General news";
-    [_data parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    _navItem.title = _channel[@"channel"];
+    [_data parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +51,7 @@
 
 - (IBAction)refreshButtonDidPressed:(id)sender
 {
-    [_data parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    [_data parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
     [self.tableView reloadData];
 }
 
@@ -88,7 +88,6 @@
     } else {
         cell.picture.image = [UIImage imageNamed:@"noImage"];
     }
-    //url = [NSURL URLWithString:[_data.news[indexPath.row] objectForKey:@"link"]];
     return cell;
 }
 
@@ -104,44 +103,5 @@
         [[segue destinationViewController] setItem:_data.news[index.row]];
     }
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 @end
