@@ -34,9 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //<channel>Главные новости – Новости Google
-    _navItem.title = @"General news";
-    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    _navItem.title = _channel[@"channel"];
+    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +46,7 @@
 
 - (IBAction)refreshButtonDidPressed:(id)sender
 {
-    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:@"https://news.google.com/news/feeds?pz=1&cf=all&ned=ru_ua&hl=ru&output=rss"]];
+    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
     [self.tableView reloadData];
 }
 
