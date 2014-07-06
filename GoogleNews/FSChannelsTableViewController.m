@@ -32,11 +32,11 @@ static
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _channels = @[@{@"channel": @"Top Stories", @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&output=rss"},
-                  @{@"channel": @"World", @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=w&output=rss"},
-                  @{@"channel": @"Ukraine", @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=n&output=rss"},
-                  @{@"channel": @"Business", @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=t&output=rss"},
-                  @{@"channel": @"Science and technology", @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=t&output=rss"},
+    _channels = @[@{@"channel": @"Top Stories",             @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&output=rss"},
+                  @{@"channel": @"World",                   @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=w&output=rss"},
+                  @{@"channel": @"Ukraine",                 @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=n&output=rss"},
+                  @{@"channel": @"Business",                @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=b&output=rss"},
+                  @{@"channel": @"Science and technology",  @"url": @"http://news.google.ru/news?cf=all&ned=ru_ua&hl=ru&topic=t&output=rss"},
                   ];
     self.navigationItem.title = @"GoogleNews";
 }
