@@ -11,11 +11,12 @@
 #import "FSData.h"
 #import "FSDetailViewController.h"
 
-#define newsArray [[FSData sharedData] fetchData]
+#define newsArray [[FSData sharedData] allNews]
 
 @interface FSGeneralTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
+@property (assign) BOOL busy;
 
 @end
 
@@ -35,7 +36,8 @@
 {
     [super viewDidLoad];
     _navItem.title = _channel[@"channel"];
-    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
+    _busy = NO;
+    [self parseData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,8 +48,27 @@
 
 - (IBAction)refreshButtonDidPressed:(id)sender
 {
-    [[FSData sharedData] parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
-    [self.tableView reloadData];
+    [self parseData];
+}
+
+- (void)parseData
+{
+    if (_busy) {
+        return;
+    }
+    _busy = YES;
+    [newsArray removeAllObjects];
+    //parse in background
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    dispatch_async(queue, ^{
+        [[FSData sharedData] parseAtUrl:[NSURL URLWithString:_channel[@"url"]]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [self.tableView reloadData];
+            _busy = NO;
+        });
+    });
 }
 
 #pragma mark - Table view data source
@@ -61,7 +82,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[FSData sharedData] fetchData] count];
+    return [newsArray count];
 }
 
 

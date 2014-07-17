@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoogleNews/FSData.m"
-            timestampString = "425916091.091616"
+            timestampString = "427326415.000753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -32,22 +32,6 @@
             startingLineNumber = "47"
             endingLineNumber = "47"
             landmarkName = "-viewDidDisappear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoogleNews/FSData.m"
-            timestampString = "425916091.091616"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-parseAtUrl:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

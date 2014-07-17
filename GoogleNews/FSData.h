@@ -25,6 +25,7 @@ this array consists of a NSDictionary objects that contain key-object pairs. Her
 
 + (instancetype)sharedData;
 - (void)parseAtUrl:(NSURL *)url;
-- (NSArray *)fetchData;
+
+@property (strong, nonatomic) NSMutableArray *allNews; //will contain downloaded news
 
 @end

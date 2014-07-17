@@ -10,7 +10,6 @@
 
 @interface FSData () <NSXMLParserDelegate>
 
-@property (strong, nonatomic) NSMutableArray *privateNews; //will contain downloaded news
 @property (strong, nonatomic) NSXMLParser *parser; //xml parser object
 @property (strong, nonatomic) NSString *element; //element that parsing at moment
 @property (strong, nonatomic) NSMutableDictionary *item; //contains the item title, url, picture, etc.
@@ -50,18 +49,10 @@
 
 - (void)parseAtUrl:(NSURL *)url
 {
-    if (_privateNews) {
-        [_privateNews removeAllObjects]; //clean after prev. use
-    }
-    _privateNews = [[NSMutableArray alloc] init];
+    _allNews = [[NSMutableArray alloc] init];
     _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
     [_parser setDelegate:self];
     [_parser parse];
-}
-
-- (NSArray *)fetchData
-{
-    return [_privateNews copy];
 }
 
 #pragma mark -  Parser delegate methods
@@ -114,7 +105,7 @@
             _itemPictureAddres = [NSMutableString stringWithFormat:@"https://%@", link];
         }
         [_item setObject:_itemPictureAddres forKey:@"picture"];
-        [_privateNews addObject:_item];
+        [_allNews addObject:_item];
     }
 }
 

@@ -19,12 +19,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHI-3a-jNf" id="WZ6-vo-cmd">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="usA-1H-NZG">
-                                            <rect key="frame" x="261" y="12" width="20" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </activityIndicatorView>
-                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="LVG-iC-eD3" kind="push" identifier="selectedChannel" id="qvf-IC-U0X"/>
